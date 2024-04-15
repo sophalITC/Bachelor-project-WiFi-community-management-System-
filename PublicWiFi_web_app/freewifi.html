@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+	<head>
+		<title>Public WiFi Commuication</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<link rel="stylesheet" href="css/mainstyle.css" type="text/css">
+		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.dropotron.min.js"></script>
+		<script src="js/jquery.scrollgress.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-wide.css" />
+		</noscript>
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+	</head>
+	<body>
+
+		<!-- Header -->
+			<header id="header" class="skel-layers-fixed">
+				<h1><a href="index.html">Public WiFi Communication System</a> by PSU TEAM</h1>
+				<nav id="nav">
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li>
+							<a href="" class="icon fa-angle-down">Menus</a>
+							<ul>
+								<li><a href="Share.html">Share</a></li>
+								<li><a href="freewifi.html">Free WiFi</a></li>
+								<li><a href="contact.html">Contact</a></li>
+								<li><a href="elements.html">Elements</a></li>
+								<li>
+									<a href="">Submenu</a>
+									<ul>
+										<li><a href="#">Option One</a></li>
+										<li><a href="#">Option Two</a></li>
+										<li><a href="#">Option Three</a></li>
+										<li><a href="#">Option Four</a></li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li><a href="logout.php" class="button">Logout</a></li>
+					</ul>
+				</nav>
+			</header>
+
+		<!-- Main -->
+
+			<section id="main" class="container">
+				<header>
+					<h2>Free WIFI</h2>
+					<p>A share page for Free wifi to use.</p>
+				</header>
+				<div class="box">
+					
+					<div id="map_canvas"></div>
+					<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>  
+					<script type="text/javascript">
+					var map; // กำหนดตัวแปร map ไว้ด้านนอกฟังก์ชัน เพื่อให้สามารถเรียกใช้งาน จากส่วนอื่นได้
+					var GGM; // กำหนดตัวแปร GGM ไว้เก็บ google.maps Object จะได้เรียกใช้งานได้ง่ายขึ้น
+					function initialize() { // ฟังก์ชันแสดงแผนที่
+					   GGM=new Object(google.maps); // เก็บตัวแปร google.maps Object ไว้ในตัวแปร GGM
+					   // กำหนดจุดเริ่มต้นของแผนที่
+					   var my_Latlng  = new GGM.LatLng(13.761728449950002,100.6527900695800);
+					   // กำหนด DOM object ที่จะเอาแผนที่ไปแสดง ที่นี้คือ div id=map_canvas
+					   var my_DivObj=$("#map_canvas")[0]; 
+					   // กำหนด Option ของแผนที่
+					   var myOptions = {
+						  zoom: 7, // กำหนดขนาดการ zoom
+						  center: my_Latlng , // กำหนดจุดกึ่งกลาง
+						  mapTypeId:GGM.MapTypeId.ROADMAP, // กำหนดรูปแบบแผนที่
+						  mapTypeControlOptions:{ // การจัดรูปแบบส่วนควบคุมประเภทแผนที่
+							 position:GGM.ControlPosition.TOP, // จัดตำแหน่ง
+							 style:GGM.MapTypeControlStyle.DROPDOWN_MENU // จัดรูปแบบ style 
+						  }
+					   };
+					   map = new GGM.Map(my_DivObj,myOptions);// สร้างแผนที่และเก็บตัวแปรไว้ในชื่อ map
+					   
+					   $.ajax({
+						  url:"devphpMarker.php", // ใช้ ajax ใน jQuery เรียกใช้ไฟล์ xml
+						  dataType: "xml",
+						  success:function(xml){
+							 $(xml).find('marker').each(function(){ // วนลูปดึงค่าข้อมูลมาสร้าง marker
+								   var markerID=$(this).attr("id");// นำค่าต่างๆ มาเก็บไว้ในตัวแปรไว้ใช้งาน   
+								   var markerLat=$(this).find("latitude").text(); // นำค่าต่างๆ มาเก็บไว้ในตัวแปรไว้ใช้งาน   
+								   var markerLng=$(this).find("longitude").text();   // นำค่าต่างๆ มาเก็บไว้ในตัวแปรไว้ใช้งาน  
+								   var markerName=$(this).find("zoom").text(); // นำค่าต่างๆ มาเก็บไว้ในตัวแปรไว้ใช้งาน   
+								   var markerLatLng=new GGM.LatLng(markerLat,markerLng);
+								   var my_Marker = new GGM.Marker({ // สร้างตัว marker
+									  position:markerLatLng,  // กำหนดไว้ที่เดียวกับจุดกึ่งกลาง
+									  map: map, // กำหนดว่า marker นี้ใช้กับแผนที่ชื่อ instance ว่า map
+									  icon:"http://image.ohozaa.com/i/80d/evFwn3.png",
+									  title:markerName // แสดง title เมื่อเอาเมาส์มาอยู่เหนือ
+								   });
+								//   console.log($(this).find("id").text());
+							 });
+						  }   
+					   });      
+
+					}
+					$(function(){
+					   // โหลด สคริป google map api เมื่อเว็บโหลดเรียบร้อยแล้ว
+					   // ค่าตัวแปร ที่ส่งไปในไฟล์ google map api
+					   // v=3.2&sensor=false&language=th&callback=initialize
+					   //   v เวอร์ชัน่ 3.2
+					   //   sensor กำหนดให้สามารถแสดงตำแหน่งทำเปิดแผนที่อยู่ได้ เหมาะสำหรับมือถือ ปกติใช้ false
+					   //   language ภาษา th ,en เป็นต้น
+					   //   callback ให้เรียกใช้ฟังก์ชันแสดง แผนที่ initialize
+					   $("<script/>", {
+						 "type": "text/javascript",
+						 src: "http://maps.google.com/maps/api/js?v=3.2&sensor=false&language=th&callback=initialize"
+					   }).appendTo("body");   
+					});
+					</script>  				
+
+				</div>
+			</section>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<ul class="icons">
+					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+					<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+					<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; Copy All rights PSU TEAM.</li>
+				</ul>
+			</footer>
+
+	</body>
+</html>

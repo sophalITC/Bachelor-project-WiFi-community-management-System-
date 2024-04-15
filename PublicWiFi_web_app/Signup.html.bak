@@ -1,0 +1,244 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+	<head>
+		<title>Public WiFi Commuication</title>
+		<meta charset="UTF-8">
+		<meta name="Generator" content="EditPlus®">
+		<meta name="Author" content="">
+		<meta name="Keywords" content="">
+		<meta name="Description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/mainstyle.css" type="text/css">
+		<link rel="stylesheet" media="screen and (max-width: 1200px) and (min-width: 601px)"/>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+		<script src="js/jquery.min.js"></script>
+		<script src="js/jquery.dropotron.min.js"></script>
+		<script src="js/jquery.scrollgress.min.js"></script>
+		<script src="js/skel.min.js"></script>
+		<script src="js/skel-layers.min.js"></script>
+		<script src="js/init.js"></script>
+		<noscript>
+			<link rel="stylesheet" href="css/skel.css" />
+			<link rel="stylesheet" href="css/style.css" />
+			<link rel="stylesheet" href="css/style-wide.css" />
+		</noscript>
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
+	</head>
+
+	<script type="text/javascript">
+		function checkInput(){
+				var fnameObj = document.getElementById("txtname");
+				if(fnameObj.value==""){
+					alert("กรุณาใส่ชื่อของคุณด้วยครับ");
+					fnameObj.focus();
+					return false;
+				}
+				var emailObj = document.getElementById("txtEmail");
+				var atpos = emailObj.value.indexOf("@");
+				var dotpos = emailObj.value.lastIndexOf(".");
+				if (atpos<1 || dotpos<atpos+2 || dotpos+2>=emailObj.length) {
+					alert("กรุณาใส่ emailให้ถูกต้องด้วยครับ");
+					emailObj.focus();
+					return false;
+				}
+				var fnameObj = document.getElementById("txtUsername");
+				if(fnameObj.value==""){
+					alert("กรุณาใส่ username ของคุณด้วยครับ");
+					fnameObj.focus();
+					return false;
+				}
+				var pwObj = document.getElementById("txtPassword");
+				if(pwObj.value==""){
+					alert("กรุณาใส่ password ของคุณด้วยครับ");
+					pwObj.focus();
+					return false;
+				}
+				if(pwObj.value.length<6){
+					alert("กรุณาใส่ password ให้มีวามยาว 6 - 20 ตัวอักษรครับ");
+					pwObj.focus();
+					return false;
+				}
+				var rpwObj = document.getElementById("txtConPassword");
+				if(pwObj.value != rpwObj.value){
+					alert("password ไม่ตรงกันครับ");
+					rpwObj.focus();
+					return false;
+				}
+	
+
+	
+				var phoneObj = document.getElementById("txtTel");
+				if(phoneObj.value.length != 10){
+					var i;
+					var count=0;
+					for(i=0;i<phoneObj.value.length;i++){
+						var index = phoneObj.value.charAt(i);
+						if(((index < "0"))||((index > "9"))){
+							count =1;
+						}
+					}
+					if(count==1){
+						alert("กรุณาใส่เบอร์โทรศัพท์เป็นตัวเลขครับ");
+						phoneObj.focus();
+						return false;
+					}
+					else{
+						alert("กรุณาใส่เบอร์โทรศัพท์ด้วยครับ");
+						phoneObj.focus();
+						return false;
+					}
+				}
+				if(phoneObj.value.length == 10){
+				var i;
+				for(i=0;i<phoneObj.value.length;i++){
+					var index = phoneObj.value.charAt(i);
+					if(((index < "0"))||((index > "9"))){
+						alert("กรุณาใส่เบอร์โทรศัพท์เป็นตัวเลขครับ");
+						phoneObj.focus();
+						return false;
+						}
+					}
+				}
+				if (!elements["term"].checked){
+					alert("กรุณาตอบรับ  terms & conditions ด้วยครับ");
+					return false; 
+				}
+			}
+
+ </script>
+
+
+	<body>
+
+		<!-- Header -->
+			<header id="header" class="skel-layers-fixed">
+				<h1><a href="index.html">Public WiFi Communication System</a> by PSU TEAM</h1>
+				<nav id="nav">
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li>
+							<a href="" class="icon fa-angle-down">Layouts</a>
+							<ul>
+								<li><a href="generic.html">Generic</a></li>
+								<li><a href="contact.html">Contact</a></li>
+								<li><a href="elements.html">Elements</a></li>
+								<li>
+									<a href="">Submenu</a>
+									<ul>
+										<li><a href="#">Option One</a></li>
+										<li><a href="#">Option Two</a></li>
+										<li><a href="#">Option Three</a></li>
+										<li><a href="#">Option Four</a></li>
+									</ul>
+								</li>
+							</ul>
+						</li>
+						<li><a href="#" class="button">Sign Up</a></li>
+					</ul>
+				</nav>
+			</header>
+
+		<!-- Main -->
+			<section id="main" class="container">
+				<header>
+					<h2>Sign Up</h2>
+					<p>Sign up for Member.</p>
+				</header>
+				<div class="row">
+					<div class="12u">
+						<!-- Form -->
+							<section class="box">
+								<h3>Register</h3>
+								<form method="post" action="save_register.php">
+									<div class="row uniform 50%">
+										<div class="6u 12u(mobilep)">
+											<input type="text" name="txtname" id="txtname" value="" placeholder="Name" />
+										</div>
+										<div class="6u 12u(mobilep)">
+											<input type="email" name="txtEmail" id="txtEmail" value="" placeholder="Email" />
+										</div>
+									</div>
+									<div class="row uniform 50%">
+										<div class="6u 12u(mobilep)">
+											<input type="text" name="txtUsername" id="txtUsername" value="" placeholder="Username" />
+										</div>
+										<div class="6u 12u(mobilep)">
+											<input type="password" name="txtPassword" id="txtPassword" value="" placeholder="Password" />
+										</div>
+									</div>
+									<div class="row uniform 50%">
+										<div class="6u 12u(mobilep)">
+											<input type="password" name="txtConPassword" id="txtConPassword" value="" placeholder="Confirm Password" />
+										</div>
+										<div class="6u 12u(mobilep)">
+											<input type="text" name="txtTel" id="txtTel" value="" placeholder="Tel" />
+										</div>
+
+									<div>
+										<!-- Text -->
+										<h4>Terms & Conditions</h4>
+										<blockquote>Welcome to our website. If you continue to browse and use this website, you are agreeing to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern [business name]'s relationship with you in relation to this website. If you disagree with any part of these terms and conditions, please do not use our website.
+
+										The term '[business name]' or 'us' or 'we' refers to the owner of the website whose registered office is [address]. Our company registration number is [company registration number and place of registration]. The term 'you' refers to the user or viewer of our website.
+
+										The use of this website is subject to the following terms of use:
+
+										The content of the pages of this website is for your general information and use only. It is subject to change without notice.
+										This website uses cookies to monitor browsing preferences. If you do allow cookies to be used, the following personal information may be stored by us for use by third parties: [insert list of information].
+										Neither we nor any third parties provide any warranty or guarantee as to the accuracy, timeliness, performance, completeness or suitability of the information and materials found or offered on this website for any particular purpose. You acknowledge that such information and materials may contain inaccuracies or errors and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law.
+										Your use of any information or materials on this website is entirely at your own risk, for which we shall not be liable. It shall be your own responsibility to ensure that any products, services or information available through this website meet your specific requirements.
+										This website contains material which is owned by or licensed to us. This material includes, but is not limited to, the design, layout, look, appearance and graphics. Reproduction is prohibited other than in accordance with the copyright notice, which forms part of these terms and conditions.
+										All trade marks reproduced in this website which are not the property of, or licensed to, the operator are acknowledged on the website.
+										Unauthorised use of this website may give rise to a claim for damages and/or be a criminal offence.
+										From time to time this website may also include links to other websites. These links are provided for your convenience to provide further information. They do not signify that we endorse the website(s). We have no responsibility for the content of the linked website(s).
+										Your use of this website and any dispute arising out of such use of the website is subject to the laws of England, Northern Ireland, Scotland and Wales.</blockquote>
+
+									</div>
+
+									<div class="row uniform 50%">
+										<div class="6u 12u(narrower)">
+											<input type="checkbox" id="term" name="term">
+											<label for="term">I have read and accept the terms & conditions relating to 
+											this membership's registration.</label>
+										</div>
+									</div>
+
+									<div>
+										<div>
+											<input class="button special" type="submit" onclick = "return checkInput();" value="Save"> 
+										</div>
+									</div>	
+
+								</form>
+							
+								<hr />
+
+							</section>
+
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="12u">
+
+		<!-- Footer -->
+			<footer id="footer">
+				<ul class="icons">
+					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+					<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+					<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+				</ul>
+				<ul class="copyright">
+					<li>&copy; Copy All rights PSU TEAM.</li>
+				</ul>
+			</footer>
+
+	</body>
+</html>
