@@ -31,7 +31,7 @@ Ensure you have the following installed:
 
 1. Clone the repository to your local machine or server:
    ```bash
-   git clone https://github.com/yourrepository/public-wifi-monitoring.git
+   https://github.com/sophalITC/Bachelor-project-WiFi-community-management-System-.git
 
 
 ### Contributors
